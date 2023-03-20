@@ -29,7 +29,8 @@ const result = computed(() => {
 	if (array.value.length === arrayLength.value) {
 		const startTime = performance.now();
 
-		const sorted = sortOptions
+		const sorted =
+			sortOptions
 				.find((o) => o.value === selectedSort.value)
 				?.sort([...array.value]) || [];
 
@@ -78,7 +79,9 @@ const result = computed(() => {
 		</div>
 	</form>
 
-	<div class="result">Результат: {{ result }}. Время выполнения: {{ executeTime }}ms</div>
+	<div class="result">
+		Результат: {{ result }}. Время выполнения: {{ executeTime }}ms
+	</div>
 </template>
 
 <style scoped>
