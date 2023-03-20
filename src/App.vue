@@ -13,6 +13,7 @@ const sortOptions = [
 const selectedSort = ref('bubble');
 const arrayLength = ref(0);
 const array = ref([]);
+const executeTime = ref(0);
 
 watch(arrayLength, () => {
 	if (array.value.length > arrayLength.value) {
@@ -26,11 +27,17 @@ const result = computed(() => {
 	}
 
 	if (array.value.length === arrayLength.value) {
-		return (
-			sortOptions
+		const startTime = performance.now();
+
+		const sorted = sortOptions
 				.find((o) => o.value === selectedSort.value)
-				?.sort([...array.value]) || []
-		);
+				?.sort([...array.value]) || [];
+
+		const endTime = performance.now();
+
+		executeTime.value = (endTime - startTime).toFixed(10);
+
+		return sorted;
 	}
 
 	return [];
@@ -71,7 +78,7 @@ const result = computed(() => {
 		</div>
 	</form>
 
-	<div class="result">Результат: {{ result }}</div>
+	<div class="result">Результат: {{ result }}. Время выполнения: {{ executeTime }}ms</div>
 </template>
 
 <style scoped>
